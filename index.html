@@ -90,18 +90,16 @@
 
             function handleYesClick() {
                 emailjs.send(
-    import.meta.env.VITE_EMAILJS_SERVICE_ID,
-    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-    {
-        to_email: "samolderoy@gmail.com",
-        from_name: "Borty ❤️",
-        to_name: "Samantha Rae Nieva",
-        message: "Hey borty! You've just accepted my Valentine’s invitation! ❤️",
-        invitation_image: "https://i.postimg.cc/vZCKdVSN/Black-and-Pink-Modern-Illustrative-Valentine-s-Day-Dinner-Invitation-Facebook-Post.png"
-    },
-    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-)
-
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                {
+                    to_email: "samolderoy@gmail.com",
+                    from_name: "Borty ❤️",
+                    to_name: "Samantha Rae Nieva",
+                    message: "Hey borty! You've just accepted my Valentine’s invitation! ❤️",
+                    invitation_image: "https://i.postimg.cc/vZCKdVSN/Black-and-Pink-Modern-Illustrative-Valentine-s-Day-Dinner-Invitation-Facebook-Post.png"
+                },
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
                 .then(function(response) {
                     alert("Invitation sent! ❤️ Check your email!");
                     window.location.href = "yes_page.html";
