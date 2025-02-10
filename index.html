@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+            emailjs.init("your_user_id"); // Replace with your EmailJS user ID
+        </script>
+
+        <style>
+            .tooltip {
+                display: none;
+                position: absolute;
+                background-color: pink;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 14px;
+                font-family: 'Dancing Script', cursive;
+
+            }
+            .yes-button:hover + .tooltip {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Will you be my Valentine?</h1>
+            <div class="buttons">
+                <button class="yes-button" onmouseover="showTooltip()" onmouseout="hideTooltip()" onclick="handleYesClick()">Yes</button>
+                <span class="tooltip" id="tooltip">Please click it! ❤️</span>
+                <button class="no-button" onclick="handleNoClick()">No</button>
+            </div>
+            <div class="gif_container">
+                <img src="https://media.tenor.com/SFy5Za0DyMEAAAAi/erm-fingers.gif" alt="Cute GIF">
+            </div>
+        </div>
+        <script>
+            (async function checkForUpdates() {
+                const currentVersion = "1.0";
+                const versionUrl = "https://raw.githubusercontent.com/ivysone/Will-you-be-my-Valentine-/main/version.json"; 
+
+                try {
+                    const response = await fetch(versionUrl);
+                    if (!response.ok) {
+                        console.warn("Could not fetch version information.");
+                        return;
+                    }
+                    const data = await response.json();
+                    const latestVersion = data.version;
+                    const updateMessage = data.updateMessage;
+
+                    if (currentVersion !== latestVersion) {
+                        alert(updateMessage);
+                    } else {
+                        console.log("You are using the latest version.");
+                    }
+                } catch (error) {
+                    console.error("Error checking for updates:", error);
+                }
+            })();
+
+            const messages = [
+                "Are you sure?",
+                "Really sure??",
+                "Are you positive?",
+                "Pookie please...",
+                "Just think about it!",
+                "If you say no, I will be really sad...",
+                "I will be very sad...",
+                "I will be very very very sad...",
+                "Ok fine, I will stop asking...",
+                "Just kidding, say yes please! ❤️"
+            ];
+
+            let messageIndex = 0;
+
+            function handleNoClick() {
+                const noButton = document.querySelector('.no-button');
+                const yesButton = document.querySelector('.yes-button');
+                noButton.textContent = messages[messageIndex];
+                messageIndex = (messageIndex + 1) % messages.length;
+                const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+                yesButton.style.fontSize = `${currentSize * 1.5}px`;
+            }
+
+            function handleYesClick() {
+                emailjs.send("service_wucl9ed", "template_t7wpobr", {
+                    to_email: "samolderoy@gmail.com",
+                    from_name: "Borty ❤️",
+                    to_name: "Samantha Rae Nieva",
+                    message: "Hey borty! You've just accepted my Valentine’s invitation! ❤️",
+                    invitation_image: "https://i.postimg.cc/vZCKdVSN/Black-and-Pink-Modern-Illustrative-Valentine-s-Day-Dinner-Invitation-Facebook-Post.png" // Replace with actual image URL
+                    }, "qAW9sVz8mdK4RjA9M")
+                .then(function(response) {
+                    alert("Invitation sent! ❤️ Check your email!");
+                    window.location.href = "yes_page.html";
+                }, function(error) {
+                    console.error("Email failed to send:", error);
+                    alert("Oops! Something went wrong. 😢 Try again.");
+                });
+            }
+
+
+
+            function showTooltip() {
+                document.getElementById("tooltip").style.display = "inline-block";
+            }
+            function hideTooltip() {
+                document.getElementById("tooltip").style.display = "none";
+            }
+        </script>
+    </body>
+    </html>
